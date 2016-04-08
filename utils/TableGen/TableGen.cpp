@@ -119,7 +119,7 @@ bool LLVMTableGenMain(raw_ostream &OS, RecordKeeper &Records) {
     EmitAsmMatcher(Records, OS);
     break;
   case GenDisassembler:
-    EmitDisassembler(Records, OS);
+    std::abort();
     break;
   case GenPseudoLowering:
     EmitPseudoLowering(Records, OS);

@@ -19,7 +19,6 @@ add_tablegen(llvm-tblgen LLVM
   DAGISelMatcherOpt.cpp
   DAGISelMatcher.cpp
   DFAPacketizerEmitter.cpp
-  DisassemblerEmitter.cpp
   FastISelEmitter.cpp
   FixedLenDecoderEmitter.cpp
   InstrInfoEmitter.cpp
@@ -29,8 +28,6 @@ add_tablegen(llvm-tblgen LLVM
   RegisterInfoEmitter.cpp
   SubtargetEmitter.cpp
   TableGen.cpp
-  X86DisassemblerTables.cpp
   X86ModRMFilters.cpp
-  X86RecognizableInstr.cpp
   CTagsEmitter.cpp
   )
