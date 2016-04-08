@@ -1015,9 +1015,9 @@ function(add_lit_target target comment)
       COMMAND ${CMAKE_COMMAND} -E echo "${target} does nothing, no tools built.")
     message(STATUS "${target} does nothing.")
   endif()
-  if (ARG_DEPENDS)
-    add_dependencies(${target} ${ARG_DEPENDS})
-  endif()
+#  if (ARG_DEPENDS)
+#    add_dependencies(${target} ${ARG_DEPENDS})
+#  endif()
 
   # Tests should be excluded from "Build Solution".
   set_target_properties(${target} PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD ON)
