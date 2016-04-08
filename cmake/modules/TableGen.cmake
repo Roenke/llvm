@@ -88,7 +88,7 @@ endif(LLVM_USE_HOST_TOOLS)
 
 macro(add_tablegen target project)
   set(${target}_OLD_LLVM_LINK_COMPONENTS ${LLVM_LINK_COMPONENTS})
-  set(LLVM_LINK_COMPONENTS ${LLVM_LINK_COMPONENTS} TableGen)
+  set(LLVM_LINK_COMPONENTS TableGen ${LLVM_LINK_COMPONENTS})
 
   if(NOT XCODE)
     # FIXME: It leaks to user, callee of add_tablegen.
