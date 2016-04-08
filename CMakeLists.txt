@@ -579,35 +579,14 @@ endif()
 
 # Put this before tblgen. Else we have a circular dependence.
 add_subdirectory(lib/Support)
-add_subdirectory(lib/TableGen)
-
-add_subdirectory(utils/TableGen)
 
 add_subdirectory(include/llvm)
 
 add_subdirectory(lib)
 
-if( LLVM_INCLUDE_UTILS )
-  add_subdirectory(utils/FileCheck)
-  add_subdirectory(utils/PerfectShuffle)
-  add_subdirectory(utils/count)
-  add_subdirectory(utils/not)
-  add_subdirectory(utils/llvm-lit)
-  add_subdirectory(utils/yaml-bench)
-else()
-  if ( LLVM_INCLUDE_TESTS )
-    message(FATAL_ERROR "Including tests when not building utils will not work.
-    Either set LLVM_INCLUDE_UTILS to On, or set LLVM_INCLDE_TESTS to Off.")
-  endif()
-endif()
-
 # Use LLVM_ADD_NATIVE_VISUALIZERS_TO_SOLUTION instead of LLVM_INCLUDE_UTILS because it is not really a util
 if (LLVM_ADD_NATIVE_VISUALIZERS_TO_SOLUTION)
   add_subdirectory(utils/LLVMVisualizers)
-endif()
-
-if(LLVM_INCLUDE_TESTS)
-  add_subdirectory(utils/unittest)
 endif()
 
 foreach( binding ${LLVM_BINDINGS_LIST} )
