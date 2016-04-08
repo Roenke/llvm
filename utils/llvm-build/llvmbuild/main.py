@@ -755,16 +755,7 @@ def add_magic_target_components(parser, project, opts):
                            'x86_64' : 'X86',
                            'Unknown' : None }.get(opts.native_target,
                                                   opts.native_target)
-    if native_target_name is None:
-        native_target = None
-    else:
-        native_target = available_targets.get(native_target_name)
-        if native_target is None:
-            parser.error("invalid native target: %r (not in project)" % (
-                    opts.native_target,))
-        if native_target.type_name != 'TargetGroup':
-            parser.error("invalid native target: %r (not a target)" % (
-                    opts.native_target,))
+    native_target = None
 
     # Find the list of targets to enable.
     if opts.enable_targets is None:
@@ -779,15 +770,6 @@ def add_magic_target_components(parser, project, opts):
             enable_target_names = opts.enable_targets.split(';')
 
         enable_targets = []
-        for name in enable_target_names:
-            target = available_targets.get(name)
-            if target is None:
-                parser.error("invalid target to enable: %r (not in project)" % (
-                        name,))
-            if target.type_name != 'TargetGroup':
-                parser.error("invalid target to enable: %r (not a target)" % (
-                        name,))
-            enable_targets.append(target)
 
     # Find the special library groups we are going to populate. We enforce that
     # these appear in the project (instead of just adding them) so that they at
@@ -824,21 +806,6 @@ def add_magic_target_components(parser, project, opts):
     for ci in enable_targets:
         all_targets.required_libraries.append(ci.name)
         ci.enabled = True
-
-    # If we have a native target, then that defines the native and
-    # native_codegen libraries.
-    if native_target and native_target.enabled:
-        native_group.required_libraries.append(native_target.name)
-        native_codegen_group.required_libraries.append(
-            '%sCodeGen' % native_target.name)
-
-    # If we have a native target with a JIT, use that for the engine. Otherwise,
-    # use the interpreter.
-    if native_target and native_target.enabled and native_target.has_jit:
-        engine_group.required_libraries.append('MCJIT')
-        engine_group.required_libraries.append(native_group.name)
-    else:
-        engine_group.required_libraries.append('Interpreter')
 
 def main():
     from optparse import OptionParser, OptionGroup
