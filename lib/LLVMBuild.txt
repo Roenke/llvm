@@ -20,7 +20,6 @@ subdirectories =
  Analysis
  AsmParser
  Bitcode
- CodeGen
  DebugInfo
  ExecutionEngine
  LibDriver
@@ -37,7 +36,6 @@ subdirectories =
  ProfileData
  Support
  TableGen
- Target
  Transforms
 
 [component_0]
